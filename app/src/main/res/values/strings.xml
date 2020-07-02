@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">Cheap Stays</string>
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
+    <string-array name="spinnerAdults">
+        <item>none</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="spinnerChildren">
+        <item>none</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="NoOfRooms">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="search">Search for Hotel Location</string>
+    <string-array name="cities">
+        <item>Bangalore</item>
+        <item>Chennai</item>
+        <item>Mumbai</item>
+        <item>Pune</item>
+        <item>Delhi</item>
+    </string-array>
+
+
+    <string name="appbar_scrolling_view_behavior">behaviour</string>
+    <string name="image">image</string>
+    <string name="roomtype">Roomtype</string>
+    <string name="facilities">facilities</string>
+    <string name="price">$Price</string>
+    <string name="phone">Phone</string>
+    <string name="guest">Guest</string>
+    <string name="CheckIn">Check-In</string>
+    <string name="checkout">Check-Out</string>
+    <string name="payment">Total Payment</string>
+    <string name="about">About</string>
+    <string name="quit">Quit</string>
+    <string name="hotel_moto">Hotels to celebrate life.</string>
+    <string name="name">Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="iv_login_background">login background</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="user_login">User Login</string>
+    <string name="admin_login">Admin Login</string>
+    <string name="default_rating_4_5">4.5</string>
+    <string name="book">Book</string>
+    <string name="list_of_hotels">List of Hotels</string>
+    <string name="login_background">login background</string>
+    <string name="logout">Logout</string>
+    <string name="your_name">Your Name:</string>
+    <string name="your_email_address">Your Email Address:</string>
+    <string name="your_phone_number">Your Phone Number:</string>
+    <string name="email_is_not_verfied_yet">Email is Not Verfied Yet!</string>
+    <string name="verify_now">Verify Now</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="change_profile">Change Profile</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="enter_date">Enter Date</string>
+    <string name="number_of_children">Number of Children:</string>
+    <string name="number_of_adults">Number of Adults:</string>
+    <string name="number_of_rooms">Number of Rooms:</string>
+    <string name="customer_name">Customer Name:</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="single_bed">Single Bed</string>
+    <string name="double_bed">Double Bed</string>
+    <string name="triple_bed">Triple Bed</string>
+    <string name="regular_room">Regular Room</string>
+    <string name="luxury_room">Luxury Room</string>
+    <string name="suite_room">Suite Room</string>
+    <string name="room_type">Room type:</string>
+    <string name="hint_your_name">Your Name</string>
+    <string name="hint_your_email_address">Your Email Address</string>
+    <string name="hint_your_phone_no">Your Phone No</string>
+    <string name="save">Save</string>
+    <string name="your_booking_details">Your Booking Details:</string>
+    <string name="add_hotel_name">Please add hotel name </string>
+    <string name="add_number_of_rooms">Please add number of hotel rooms </string>
+    <string name="add_hotel_description">Please add hotel desciption </string>
+    <string name="add_hotel_details">Please add hotel details</string>
+    <string name="close">Close</string>
+    <string name="sign_out">Sign Out</string>
+</resources>

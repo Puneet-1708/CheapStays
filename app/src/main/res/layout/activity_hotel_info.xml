@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_hotel_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cap.cheapstays.HotelInfoActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/appbar"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/hotelTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorAccent"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarLayoutExpandedTextStyle"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+            <ImageView
+                android:id="@+id/hotelImageInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg"
+                android:contentDescription="@string/image"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="561dp"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <Button
+                    android:id="@+id/aboutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/round_btn"
+                    android:text="@string/about"
+                    android:textColor="@color/whiteTextColor" />
+
+                <TextView
+                    android:id="@+id/bookingtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/aboutButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="19dp"
+                    android:text="Your booking at hotel"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/bookingtitle"
+                    android:layout_alignParentLeft="true"
+                    android:background="@android:color/darker_gray"
+                    android:visibility="visible"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView4"
+                    android:layout_alignBottom="@+id/textView4"
+                    android:layout_marginEnd="35dp"
+                    android:layout_toStartOf="@+id/textView17"
+                    android:text="@string/check_in"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/separator"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_toEndOf="@+id/textView17"
+                    android:text="@string/check_out"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tvCheckin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView4"
+                    android:layout_alignStart="@+id/textView3"
+                    android:layout_marginTop="14dp"
+                    android:focusable="false"
+                    android:hint="@string/enter_date" />
+
+                <EditText
+                    android:id="@+id/tvCheckOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tvCheckin"
+                    android:layout_alignStart="@+id/textView4"
+                    android:layout_alignBottom="@+id/tvCheckin"
+                    android:focusable="false"
+                    android:hint="@string/enter_date" />
+
+                <View
+                    android:id="@+id/sep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/tvCheckin"
+                    android:background="@android:color/darker_gray"
+                    android:visibility="visible"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView40"
+                    android:layout_alignStart="@+id/textView40"
+                    android:layout_marginTop="23dp"
+                    android:text="@string/number_of_children"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView42"
+                    android:layout_alignStart="@+id/textView3"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/number_of_adults"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/customerName"
+                    android:layout_alignStart="@+id/textView3"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/number_of_rooms"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bookingtitle"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/progressBarHotelInfo"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/customerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvCheckin"
+                    android:layout_alignStart="@+id/textView3"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/customer_name"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etCustomer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvCheckOut"
+                    android:layout_alignStart="@+id/textView4"
+                    android:layout_marginEnd="15dp"
+                    android:hint="@string/enter_name" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupBedsNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/spinnerChildren"
+                    android:layout_marginTop="82dp"
+                    android:layout_toEndOf="@+id/textView17"
+                    android:checkedButton="@+id/radioOne">
+
+                    <RadioButton
+                        android:id="@+id/radioOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/single_bed" />
+
+                    <RadioButton
+                        android:id="@+id/radioTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/double_bed" />
+
+                    <RadioButton
+                        android:id="@+id/radioThree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/triple_bed" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupRoomType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView41"
+                    android:layout_alignTop="@+id/radioGroupBedsNo"
+                    android:checkedButton="@+id/radioRegular">
+
+                    <RadioButton
+                        android:id="@+id/radioRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/regular_room" />
+
+                    <RadioButton
+                        android:id="@+id/radioLuxury"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/luxury_room" />
+
+                    <RadioButton
+                        android:id="@+id/radioSuite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/suite_room" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView41"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/room_type"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerNoOfRooms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView42"
+                    android:layout_alignStart="@+id/tvCheckOut"
+                    android:layout_alignBottom="@+id/tvCheckOut"
+                    android:entries="@array/spinnerAdults" />
+
+                <Spinner
+                    android:id="@+id/spinnerAdults"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView40"
+                    android:layout_alignStart="@+id/tvCheckOut"
+                    android:layout_alignBottom="@+id/textView40"
+                    android:entries="@array/spinnerAdults" />
+
+                <Spinner
+                    android:id="@+id/spinnerChildren"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/spinnerAdults"
+                    android:layout_alignBottom="@+id/textView41"
+                    android:layout_toEndOf="@+id/radioGroupRoomType"
+                    android:entries="@array/spinnerChildren" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/confirmBooking"
+            style="@style/loginButton"
+            android:layout_width="350dp"
+            android:layout_gravity="center"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="@string/book"
+            android:textSize="20sp"
+            app:cornerRadius="20dp" />
+
+    </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

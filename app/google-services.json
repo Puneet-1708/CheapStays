@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "576990424858",
+    "firebase_url": "https://hotel-adba3.firebaseio.com",
+    "project_id": "hotel-adba3",
+    "storage_bucket": "hotel-adba3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576990424858:android:f3fb1c9ab69555e00f46a3",
+        "android_client_info": {
+          "package_name": "com.cap.cheapstays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576990424858-oq9kqa1duvjuls7194la260dq6riilm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cap.cheapstays",
+            "certificate_hash": "e258c12f4855fc0b8a5716a9b49e6e9bd5d89748"
+          }
+        },
+        {
+          "client_id": "576990424858-6i7c9sho7nmhimstqlkc8olrha8h41i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClnz4f_-i8VESD9BEGEynN8Z9JpAgx1IY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576990424858-6i7c9sho7nmhimstqlkc8olrha8h41i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
