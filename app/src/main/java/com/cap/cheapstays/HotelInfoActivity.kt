@@ -5,11 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hotel_info.*
 import java.util.*
 
@@ -28,6 +29,7 @@ class HotelInfoActivity : AppCompatActivity() {
      val button:Button?=null
     val TAG:String="ReceiptData"
     var documentID:String?=null
+    lateinit var Dataref: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +40,47 @@ class HotelInfoActivity : AppCompatActivity() {
         val noOfChildren = resources.getStringArray(R.array.spinnerChildren)
         val noOfRooms= resources.getStringArray(R.array.NoOfRooms)
         val name=findViewById<EditText>(R.id.etCustomer)
-        val button=findViewById<Button>(R.id.aboutButton)
+        val image=findViewById<ImageView>(R.id.hotelImageInfo)
+        val hotelName=findViewById<TextView>(R.id.hotel_name_info)
+        val hotelRating=findViewById<TextView>(R.id.hotel_rating_info)
+        val hotelPrice=findViewById<TextView>(R.id.hotel_price_info)
+        val phone=findViewById<TextView>(R.id.hotel_phone_info)
+        val hotelFacility=findViewById<TextView>(R.id.hotel_facility_info)
 
+
+
+
+
+        val hotelKey: String?= intent.getStringExtra("HotelKey")
+        Dataref = FirebaseDatabase.getInstance().reference.child("Hotel")
+
+        Dataref.child(hotelKey!!).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val ImageUrl = dataSnapshot.child("hotelImageURL").value.toString()
+                    Picasso.get().load(ImageUrl).into(image)
+
+                    val hotelname=dataSnapshot.child("hotelName").value.toString()
+                    hotelName.text =hotelname
+
+                    val hotelRat=dataSnapshot.child("rating").value.toString()
+                    hotelRating.text =hotelRat
+
+                    val hotelprice=dataSnapshot.child("price").value.toString()
+
+                    hotelPrice.text =hotelprice
+
+                    val hotelPhone=dataSnapshot.child("phone").value.toString()
+                    phone.text=hotelPhone
+
+                    val hotelfacility=dataSnapshot.child("facility").value.toString()
+                   hotelFacility.text=hotelfacility
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
 
 
         val db= FirebaseFirestore.getInstance()
@@ -156,7 +197,6 @@ class HotelInfoActivity : AppCompatActivity() {
 
                 db.collection("Booking").add(data)
                     .addOnSuccessListener { documentReference ->
-                      //  Log.e(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
                         documentID=documentReference.id
                         documentActivity(documentID)
 
@@ -164,7 +204,7 @@ class HotelInfoActivity : AppCompatActivity() {
 
                     }
                     .addOnFailureListener { e ->
-                        Log.e(TAG, "Error adding document", e)
+                      Toast.makeText(this,"Error adding document",Toast.LENGTH_SHORT).show()
                     }
 
 
@@ -173,10 +213,6 @@ class HotelInfoActivity : AppCompatActivity() {
 
         }
 
-
-        button.setOnClickListener {
-            startActivity(Intent(this@HotelInfoActivity, AboutHotelActivity::class.java))
-        }
 
 
     }

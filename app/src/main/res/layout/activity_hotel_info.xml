@@ -36,13 +36,87 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hotel_name_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/hotel_rating_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/hotel_facility_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text=" Featuring floor-to-ceiling windows and scenic views, the chic,A stylish restaurant has city views, and a terrace cafe serves Malaysian food. airy rooms and suites offer free Wi-Fi,plus tea and coffeemakers. Free breakfast and snacks.There's 24-hour room service."
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/location"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bengaluru"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/contact"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:id="@+id/hotel_phone_info"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Price:"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:id="@+id/hotel_price_info"/>
 
 
             <RelativeLayout
@@ -53,21 +127,11 @@
                 android:orientation="horizontal"
                 tools:ignore="UselessParent">
 
-                <Button
-                    android:id="@+id/aboutButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/round_btn"
-                    android:text="@string/about"
-                    android:textColor="@color/whiteTextColor" />
 
                 <TextView
                     android:id="@+id/bookingtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/aboutButton"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="19dp"
                     android:text="Your booking at hotel"

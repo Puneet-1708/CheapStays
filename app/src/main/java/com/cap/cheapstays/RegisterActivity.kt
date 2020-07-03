@@ -92,10 +92,7 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }.addOnFailureListener { e ->
-                        Log.d(
-                            TAG,
-                            "onFailure: Email not sent " + e.message
-                        )
+                      Toast.makeText(this,"Email not sent",Toast.LENGTH_SHORT).show()
                     }
                     Toast.makeText(this@RegisterActivity, "User Created.", Toast.LENGTH_SHORT)
                         .show()
@@ -107,10 +104,8 @@ class RegisterActivity : AppCompatActivity() {
                     user["mobile"] = mPhone!!.text.toString()
                     user["password"] = mPassword!!.text.toString()
                     documentReference.set(user).addOnSuccessListener {
-                        Log.d(
-                            TAG,
-                            "onSuccess: user Profile is created for $userID"
-                        )
+                        Toast.makeText(this,"User Profile Created",Toast.LENGTH_SHORT).show()
+
                     }
                         .addOnFailureListener { e -> Log.d(TAG, "onFailure: $e") }
                     startActivity(Intent(applicationContext, LoginActivity::class.java))

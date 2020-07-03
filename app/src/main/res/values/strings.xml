@@ -5,40 +5,6 @@
     <string name="login_password_hint">Password</string>
     <string name="signup_login_hint">Already have an account? Sign In</string>
     <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
-    <string-array name="spinnerAdults">
-        <item>none</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string-array name="spinnerChildren">
-        <item>none</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string-array name="NoOfRooms">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
-    <string name="search">Search for Hotel Location</string>
-    <string-array name="cities">
-        <item>Bangalore</item>
-        <item>Chennai</item>
-        <item>Mumbai</item>
-        <item>Pune</item>
-        <item>Delhi</item>
-    </string-array>
-
-
     <string name="appbar_scrolling_view_behavior">behaviour</string>
     <string name="image">image</string>
     <string name="roomtype">Roomtype</string>
@@ -64,7 +30,6 @@
     <string name="default_rating_4_5">4.5</string>
     <string name="book">Book</string>
     <string name="list_of_hotels">List of Hotels</string>
-    <string name="login_background">login background</string>
     <string name="logout">Logout</string>
     <string name="your_name">Your Name:</string>
     <string name="your_email_address">Your Email Address:</string>
@@ -101,4 +66,18 @@
     <string name="add_hotel_details">Please add hotel details</string>
     <string name="close">Close</string>
     <string name="sign_out">Sign Out</string>
+    <string name="please_add_ratings">Please add ratings</string>
+    <string name="add_hotel">Add Hotel</string>
+    <string name="login_background">login background</string>
+    <string name="delete">Delete</string>
+    <string name="view_deal">View Deal</string>
+    <string name="please_enter_hotel_price">Please enter Hotel Price</string>
+    <string name="edit_hotel">Edit Hotel</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="please_enter_contact_no">Please enter contact No</string>
+    <string name="please_enter_facilities">Please enter Facilities</string>
+    <string name="hotels">Hotels</string>
+    <string name="location">Location:</string>
+    <string name="bengaluru">Bengaluru</string>
+    <string name="contact">Phone:</string>
 </resources>

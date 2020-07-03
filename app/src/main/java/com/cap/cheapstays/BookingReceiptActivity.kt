@@ -1,10 +1,12 @@
 package com.cap.cheapstays
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_booking_receipt.*
 
@@ -13,6 +15,7 @@ class BookingReceiptActivity : AppCompatActivity() {
     val TAG: String="Receipt"
     var documentID:String?=null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking_receipt)
@@ -35,13 +38,14 @@ class BookingReceiptActivity : AppCompatActivity() {
                     tv_noOfAdults.text= "4-> Number of Adult: "+document.getString("NumberOfAdults")
                     tv_bedType.text= "5-> Type of Bed: "+document.getString("TypeOfBed")
                     tv_roomType.text="6-> Type of Room: "+document.getString("TypeOfRoom")
-                    Log.e(TAG, "DocumentSnapshot data: ${document.data}")
                 } else {
-                    Log.e(TAG, "No such document")
+                    Toast.makeText(this, "No Document", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
+                Toast.makeText(this, "Unable to generate Receipt", Toast.LENGTH_SHORT)
+                    .show()
             }
 
 

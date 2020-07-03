@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(
                     Intent(
                         this@SplashActivity,
-                      SearchLocationActivity::class.java
+                      MapsActivity::class.java
                     )
                 )
                 finish()

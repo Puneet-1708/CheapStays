@@ -11,7 +11,6 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.layout_login.*
 
 class LoginActivity : AppCompatActivity() {
     var mEmail: EditText? = null
@@ -25,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         mEmail = findViewById(R.id.login_email)
         mPassword = findViewById(R.id.login_password)
         progressBar = findViewById(R.id.progressBar)
@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         mLoginBtn = findViewById(R.id.login_button)
         mCreateBtn = findViewById(R.id.need_account)
         adminLoginBtn=findViewById(R.id.adminLogin)
-
         forgotTextLink = findViewById(R.id.forget_password)
+
         mLoginBtn?.setOnClickListener(View.OnClickListener {
             val email = mEmail?.text.toString().trim { it <= ' ' }
             val password = mPassword?.text.toString().trim { it <= ' ' }
@@ -57,12 +57,12 @@ class LoginActivity : AppCompatActivity() {
 
             progressBar?.visibility = View.VISIBLE
 
-            // authenticate the user
+
             fAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this@LoginActivity, "Logged in Successfully", Toast.LENGTH_SHORT)
                         .show()
-                    startActivity(Intent(applicationContext,SearchLocationActivity::class.java))
+                    startActivity(Intent(applicationContext,MapsActivity::class.java))
                 } else {
                     Toast.makeText(
                         this@LoginActivity,
@@ -93,7 +93,6 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "Error ! Reset Link is Not Sent" + e.message, Toast.LENGTH_SHORT).show() }
             }
             passwordResetDialog.setNegativeButton("No") { dialog, which ->
-                // close the dialog
             }
             passwordResetDialog.create().show()
         })

@@ -3,7 +3,6 @@ package com.cap.cheapstays
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
@@ -34,12 +33,10 @@ class AdminLoginActivity:AppCompatActivity() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    Log.e("exist","${document.data}")
                      firebaseEmail= document.getString("adminEmail").toString()
                      firebasePassword=document.getString("adminPassword").toString()
                 } else {
 
-                    Log.e("noexist","No data")
                     Toast.makeText(this,"Document does not exist!",Toast.LENGTH_SHORT).show()
                 }
             }

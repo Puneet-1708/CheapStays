@@ -46,7 +46,8 @@
                 android:background="@drawable/ic_image"
                 android:clickable="true"
                 android:focusable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:contentDescription="@string/image" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,25 +69,25 @@
                 style="@style/modifiedEditText"
                 android:inputType="text"
                 android:maxLines="1"
-                android:hint="@string/add_number_of_rooms"/>
+                android:hint="@string/please_add_ratings"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-       <!-- <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
             <EditText
-                android:id="@+id/hotel_description"
+                android:id="@+id/add_hotel_price"
                 style="@style/modifiedEditText"
-                android:hint="@string/add_hotel_description"
-
-                android:inputType="text"/>
-        </com.google.android.material.textfield.TextInputLayout>-->
+                android:inputType="text"
+                android:maxLines="1"
+                android:hint="@string/please_enter_hotel_price"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/add_hotel_button"
             style="@style/loginButton"
             android:layout_gravity="center"
-            android:text="Add Hotel" />
+            android:text="@string/add_hotel" />
 
     </LinearLayout>
 

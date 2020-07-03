@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -81,7 +79,6 @@ class EditProfile : AppCompatActivity() {
         profileEmail?.setText(email)
         profileFullName?.setText(fullName)
         profilePhone?.setText(phone)
-        Log.d(TAG, "onCreate: $fullName $email $phone")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -89,15 +86,13 @@ class EditProfile : AppCompatActivity() {
         if (requestCode == 1000) {
             if (resultCode == Activity.RESULT_OK) {
                 val imageUri = data!!.data
-
-                //profileImage.setImageURI(imageUri);
                 uploadImageToFirebase(imageUri)
             }
         }
     }
 
     private fun uploadImageToFirebase(imageUri: Uri?) {
-        // uplaod image to firebase storage
+
         val fileRef = storageReference!!.child("users/" + fAuth!!.currentUser!!.uid + "/profile.jpg")
         fileRef.putFile(imageUri!!).addOnSuccessListener { fileRef.downloadUrl.addOnSuccessListener { uri -> Picasso.get().load(uri).into(profileImageView) } }.addOnFailureListener { Toast.makeText(applicationContext, "Failed.", Toast.LENGTH_SHORT).show() }
     }

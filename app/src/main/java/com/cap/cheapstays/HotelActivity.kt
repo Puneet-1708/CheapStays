@@ -1,16 +1,11 @@
 package com.cap.cheapstays
 
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -18,48 +13,34 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 
 class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    var fStore : FirebaseFirestore?= null
-    var storageReference: StorageReference? = null
 
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
-    var fireBaseFireStore:FirebaseFirestore?=null
     var recyclerView:RecyclerView?=null
-    var adapter:FirestoreRecyclerAdapter<Hotel,HotelViewHolder>? =null
+   var adapter:FirebaseRecyclerAdapter<Hotel,HotelViewHolder>?=null
+    lateinit var Dataref: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel)
-        fireBaseFireStore= FirebaseFirestore.getInstance()
+
+
+        Dataref = FirebaseDatabase.getInstance().reference.child("Hotel")
+
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
-        fStore = FirebaseFirestore.getInstance()
-
-
-
-        val key= fStore?.collection("Hotel")?.document()?.id
-        val storageReference=FirebaseStorage.getInstance().reference.child("HotelImage")
-      /*  val profileRef = storageReference!!.child("HotelImage/")
-        profileRef.downloadUrl.addOnSuccessListener { uri -> Picasso.get().load(uri).into() }*/
-
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -75,20 +56,20 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         recyclerView=findViewById(R.id.recyclerViewHotel)
 
-        //Query m limit or order by kr skte h
 
-        val query:Query=fireBaseFireStore!!.collection("Hotel")
+
+        val query: com.google.firebase.database.Query = Dataref.orderByChild("Hotel")
 
         
 
-        //Recycler options
 
-        val options:FirestoreRecyclerOptions<Hotel> = FirestoreRecyclerOptions.Builder<Hotel>()
+
+        val options:FirebaseRecyclerOptions<Hotel> = FirebaseRecyclerOptions.Builder<Hotel>()
             .setQuery(query,Hotel::class.java)
             .build()
 
          adapter= object :
-            FirestoreRecyclerAdapter<Hotel, HotelViewHolder>(options){
+           FirebaseRecyclerAdapter<Hotel, HotelViewHolder>(options){
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelViewHolder {
             val view:View=LayoutInflater.from(parent.context).inflate(R.layout.hotelcard,parent,false)
@@ -96,12 +77,15 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             }
 
             override fun onBindViewHolder(holder: HotelViewHolder, position: Int, model: Hotel) {
-             //  Picasso.get().load(model.hotelImageURL).into(holder.hotelImage)
-                Picasso.get().load("https://image3.mouthshut.com/images/imagesp/925752868s.jpg").into(holder.hotelImage)
+              Picasso.get().load(model.hotelImageURL).into(holder.hotelImage)
                 holder.hotelName.text = model.hotelName
                 holder.hotelRating.text=model.rating
+                holder.price.text=model.price
+
                 holder.button.setOnClickListener {
-                    startActivity(Intent(this@HotelActivity, HotelInfoActivity::class.java))
+                    val intent = Intent(this@HotelActivity,HotelInfoActivity::class.java)
+                    intent.putExtra("HotelKey", getRef(position).key)
+                    startActivity(intent)
                 }
             }
 
@@ -123,6 +107,8 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val hotelRating = itemView.findViewById<TextView>(R.id.ratings)
       val  hotelImage = itemView.findViewById<ImageView>(R.id.hotelImage)
         val button=itemView.findViewById<Button>(R.id.hotelBookButton)
+        val price=itemView.findViewById<TextView>(R.id.hotelPrice)
+
     }
 
     override fun onStart() {

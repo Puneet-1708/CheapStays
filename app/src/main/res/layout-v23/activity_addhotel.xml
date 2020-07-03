@@ -26,7 +26,7 @@
                     <ImageView
                         style="@style/parent"
                         android:background="@drawable/ic_login_bk"
-                        android:contentDescription="login background" />
+                        android:contentDescription="@string/login_background" />
 
                 </LinearLayout>
 
@@ -45,7 +45,7 @@
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
-                    android:text="Cheap Stays"
+                    android:text="@string/app_name"
                     android:layout_marginTop="40dp"/>
                 <include
                     layout="@layout/layout_addhotel"/>
