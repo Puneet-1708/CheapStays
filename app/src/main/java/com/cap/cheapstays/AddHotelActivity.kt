@@ -39,13 +39,13 @@ class AddHotelActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         hotel_price=findViewById(R.id.add_hotel_price)
 
-        dataReference= FirebaseDatabase.getInstance().reference.child("Hotel")
-        storageReference = FirebaseStorage.getInstance().reference.child("HotelImage")
+        dataReference= FirebaseDatabase.getInstance().reference.child(getString(R.string.hotel))
+        storageReference = FirebaseStorage.getInstance().reference.child(getString(R.string.hotelImage_path))
 
 
         hotelimage?.setOnClickListener(View.OnClickListener {
             val intent = Intent()
-            intent.type = "image/*"
+            intent.type = getString(R.string.gallery_path)
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, 1000)
         })
@@ -67,10 +67,10 @@ class AddHotelActivity : AppCompatActivity() {
             storageReference!!.child("$key.jpg").downloadUrl.addOnSuccessListener { uri ->
                 val hotel: HashMap<String, Any> = HashMap()
 
-                hotel["hotelImageURL"] = uri.toString()
-                hotel["hotelName"]=hotel_name?.text.toString()
-                hotel["rating"] = hotel_rating?.text.toString()
-                hotel["price"] = hotel_price?.text.toString()
+                hotel[getString(R.string.hotelImageURL_id)] = uri.toString()
+                hotel[getString(R.string.hotelName_id)]=hotel_name?.text.toString()
+                hotel[getString(R.string.rating_id)] = hotel_rating?.text.toString()
+                hotel[getString(R.string.price_id)] = hotel_price?.text.toString()
 
 
                 dataReference!!.child(key!!).setValue(hotel).addOnSuccessListener {

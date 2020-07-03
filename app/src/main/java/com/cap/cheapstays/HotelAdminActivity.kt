@@ -50,10 +50,10 @@ class HotelAdminActivity : AppCompatActivity() {
             startActivity(Intent(this, AddHotelActivity::class.java))
         })
 
-        Dataref = FirebaseDatabase.getInstance().reference.child("Hotel")
+        Dataref = FirebaseDatabase.getInstance().reference.child(getString(R.string.Hotel_path))
 
         recyclerView=findViewById(R.id.recyclerViewHotelAdmin)
-        val query: com.google.firebase.database.Query = Dataref.orderByChild("Hotel")
+        val query: com.google.firebase.database.Query = Dataref.orderByChild(getString(R.string.Hotel_path))
 
 
 
@@ -80,10 +80,10 @@ class HotelAdminActivity : AppCompatActivity() {
                 holder.hotelRating.text=model.rating
                 holder.hotelPrice.text=model.price
                holder.deleteButton.setOnClickListener {
-                    Dataref = FirebaseDatabase.getInstance().reference.child("Hotel").child(getRef(position).key.toString())
+                    Dataref = FirebaseDatabase.getInstance().reference.child(getString(R.string.Hotel_path)).child(getRef(position).key.toString())
                    Dataref.removeValue().addOnSuccessListener {
 
-                       Toast.makeText(this@HotelAdminActivity,"Data deleted",Toast.LENGTH_SHORT).show() }
+                       Toast.makeText(this@HotelAdminActivity,getString(R.string.ToastDataDeleted),Toast.LENGTH_SHORT).show() }
                }
 
             }
@@ -147,18 +147,18 @@ class HotelAdminActivity : AppCompatActivity() {
 
     private fun dialogBoxAbout() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("About")
-        builder.setMessage("This is Hotel Bookings Management System App designed for the website CheapStays.com")
-        builder.setPositiveButton("OK",null)
+        builder.setTitle(getString(R.string.About))
+        builder.setMessage(getString(R.string.descriptionOfApp))
+        builder.setPositiveButton(getString(R.string.OK),null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
 
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Are you sure want to quit?")
-        builder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> finishAffinity() })
-        builder.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
+        builder.setTitle(getString(R.string.WannaQuit))
+        builder.setPositiveButton(getString(R.string.Yes), { dialogInterface: DialogInterface, i: Int -> finishAffinity() })
+        builder.setNegativeButton(getString(R.string.No),{ dialogInterface: DialogInterface, i: Int -> })
         builder.show()
     }
 

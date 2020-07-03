@@ -95,6 +95,7 @@
                 android:orientation="horizontal"
                 android:textStyle="bold"
                 android:textSize="15sp"
+                android:text="per Night"
                 android:layout_below="@+id/hotelPrice"
                 android:layout_marginStart="20dp"/>
 

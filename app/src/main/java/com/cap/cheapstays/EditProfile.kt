@@ -32,9 +32,9 @@ class EditProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
         val data = intent
-        val fullName = data.getStringExtra("fullName")
-        val email = data.getStringExtra("email")
-        val phone = data.getStringExtra("phone")
+        val fullName = data.getStringExtra(getString(R.string.getfullName))
+        val email = data.getStringExtra(getString(R.string.getemail))
+        val phone = data.getStringExtra(getString(R.string.getphone))
         fAuth = FirebaseAuth.getInstance()
         fStore = FirebaseFirestore.getInstance()
         user = fAuth!!.currentUser
@@ -58,22 +58,22 @@ class EditProfile : AppCompatActivity() {
 
         saveBtn?.setOnClickListener(View.OnClickListener {
             if (profileFullName?.getText().toString().isEmpty() || profileEmail?.getText().toString().isEmpty() || profilePhone?.getText().toString().isEmpty()) {
-                Toast.makeText(this@EditProfile, "One or Many fields are empty.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@EditProfile, getString(R.string.ToastFieldsAreEmpty), Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             val email = profileEmail?.getText().toString()
             user!!.updateEmail(email).addOnSuccessListener {
                 val docRef = fStore!!.collection("users").document(user!!.uid)
                 val edited: MutableMap<String, Any> = HashMap()
-                edited["email"] = email
-                edited["username"] = profileFullName?.getText().toString()
-                edited["mobile"] = profilePhone?.getText().toString()
+                edited[getString(R.string.sp_email)] = email
+                edited[getString(R.string.sp_username)] = profileFullName?.getText().toString()
+                edited[getString(R.string.sp_mobile)] = profilePhone?.getText().toString()
                 docRef.update(edited).addOnSuccessListener {
-                    Toast.makeText(this@EditProfile, "Profile Updated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@EditProfile, getString(R.string.ToastProfileUpdated), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(applicationContext, ProfileActivity::class.java))
                     finish()
                 }
-                Toast.makeText(this@EditProfile, "You changed successfully.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@EditProfile, getString(R.string.ToastProfileChanged), Toast.LENGTH_SHORT).show()
             }.addOnFailureListener { e -> Toast.makeText(this@EditProfile, e.message, Toast.LENGTH_SHORT).show() }
         })
         profileEmail?.setText(email)
@@ -97,7 +97,4 @@ class EditProfile : AppCompatActivity() {
         fileRef.putFile(imageUri!!).addOnSuccessListener { fileRef.downloadUrl.addOnSuccessListener { uri -> Picasso.get().load(uri).into(profileImageView) } }.addOnFailureListener { Toast.makeText(applicationContext, "Failed.", Toast.LENGTH_SHORT).show() }
     }
 
-    companion object {
-        const val TAG = "TAG"
-    }
 }

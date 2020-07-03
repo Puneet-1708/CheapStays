@@ -27,7 +27,6 @@ class HotelInfoActivity : AppCompatActivity() {
     lateinit var name:EditText
     lateinit var nameReceipt:String
      val button:Button?=null
-    val TAG:String="ReceiptData"
     var documentID:String?=null
     lateinit var Dataref: DatabaseReference
 
@@ -51,29 +50,29 @@ class HotelInfoActivity : AppCompatActivity() {
 
 
 
-        val hotelKey: String?= intent.getStringExtra("HotelKey")
-        Dataref = FirebaseDatabase.getInstance().reference.child("Hotel")
+        val hotelKey: String?= intent.getStringExtra(getString(R.string.sp_HotelKey))
+        Dataref = FirebaseDatabase.getInstance().reference.child(getString(R.string.Hotel_path))
 
         Dataref.child(hotelKey!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val ImageUrl = dataSnapshot.child("hotelImageURL").value.toString()
+                    val ImageUrl = dataSnapshot.child(getString(R.string.hotelImageURL_id)).value.toString()
                     Picasso.get().load(ImageUrl).into(image)
 
-                    val hotelname=dataSnapshot.child("hotelName").value.toString()
+                    val hotelname=dataSnapshot.child(getString(R.string.hotelName_id)).value.toString()
                     hotelName.text =hotelname
 
-                    val hotelRat=dataSnapshot.child("rating").value.toString()
+                    val hotelRat=dataSnapshot.child(getString(R.string.rating_id)).value.toString()
                     hotelRating.text =hotelRat
 
-                    val hotelprice=dataSnapshot.child("price").value.toString()
+                    val hotelprice=dataSnapshot.child(getString(R.string.price_id)).value.toString()
 
                     hotelPrice.text =hotelprice
 
-                    val hotelPhone=dataSnapshot.child("phone").value.toString()
+                    val hotelPhone=dataSnapshot.child(getString(R.string.phone_id)).value.toString()
                     phone.text=hotelPhone
 
-                    val hotelfacility=dataSnapshot.child("facility").value.toString()
+                    val hotelfacility=dataSnapshot.child(getString(R.string.facility_id)).value.toString()
                    hotelFacility.text=hotelfacility
 
                 }
@@ -127,7 +126,7 @@ class HotelInfoActivity : AppCompatActivity() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Toast.makeText(
                         applicationContext,
-                        "Should not be blank",
+                        getString(R.string.Shouldnotbeblank),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -152,7 +151,7 @@ class HotelInfoActivity : AppCompatActivity() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     Toast.makeText(
                         applicationContext,
-                        "Should not be blank",
+                        getString(R.string.Shouldnotbeblank),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -182,20 +181,20 @@ class HotelInfoActivity : AppCompatActivity() {
         confirmBooking.setOnClickListener {
             nameReceipt=name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameReceipt)){
-               name.error="Please Enter your Name"
+               name.error=getString(R.string.pleaseEnterName)
             }
             else{
                 progressBarHotelInfo.visibility=View.VISIBLE
 
                 val data: MutableMap<String, Any> = HashMap()
-                data["CustomerName"] = nameReceipt
-                data["NumberOfRooms"] = noOfRoomsReceipt
-                data["NumberOfChildren"] = noOfChildReceipt
-                data["NumberOfAdults"] = noOfAdultsReceipt
-                data["TypeOfBed"]=radioButtonBedsReceipt.toString()
-                data["TypeOfRoom"]=radioButtonRoomsReceipt.toString()
+                data[getString(R.string.CustomerName)] = nameReceipt
+                data[getString(R.string.NumberOfRooms)] = noOfRoomsReceipt
+                data[getString(R.string.NumberOfChildren)] = noOfChildReceipt
+                data[getString(R.string.NumberOfAdults)] = noOfAdultsReceipt
+                data[getString(R.string.TypeOfBed)]=radioButtonBedsReceipt.toString()
+                data[getString(R.string.TypeOfRoom)]=radioButtonRoomsReceipt.toString()
 
-                db.collection("Booking").add(data)
+                db.collection(getString(R.string.Booking)).add(data)
                     .addOnSuccessListener { documentReference ->
                         documentID=documentReference.id
                         documentActivity(documentID)
@@ -204,7 +203,7 @@ class HotelInfoActivity : AppCompatActivity() {
 
                     }
                     .addOnFailureListener { e ->
-                      Toast.makeText(this,"Error adding document",Toast.LENGTH_SHORT).show()
+                      Toast.makeText(this,getString(R.string.ErrorAddingDocument),Toast.LENGTH_SHORT).show()
                     }
 
 
@@ -219,9 +218,9 @@ class HotelInfoActivity : AppCompatActivity() {
 
 
  fun documentActivity(documentID: String?) {
-        val sharedPref = getSharedPreferences("documentKey", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences(getString(R.string.documentKey), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putString("DocID",documentID)
+        editor.putString(getString(R.string.DocID),documentID)
         editor.apply()
         val intent= Intent(this, BookingReceiptActivity::class.java)
         startActivity(intent)
@@ -241,6 +240,7 @@ class HotelInfoActivity : AppCompatActivity() {
 
 
             }, year, month, day)
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
     private fun loadCalendar2() {
@@ -256,6 +256,7 @@ class HotelInfoActivity : AppCompatActivity() {
 
 
             }, year, month, day)
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
 }

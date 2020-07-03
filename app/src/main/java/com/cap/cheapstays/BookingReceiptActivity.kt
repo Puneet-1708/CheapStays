@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_booking_receipt.*
 
 class BookingReceiptActivity : AppCompatActivity() {
 
-    val TAG: String="Receipt"
     var documentID:String?=null
 
     @SuppressLint("SetTextI18n")
@@ -21,30 +20,30 @@ class BookingReceiptActivity : AppCompatActivity() {
         setContentView(R.layout.activity_booking_receipt)
 
 
-        val sharedPref = getSharedPreferences("documentKey", Context.MODE_PRIVATE)
-        documentID =sharedPref.getString("DocID","")
+        val sharedPref = getSharedPreferences(getString(R.string.documentKey), Context.MODE_PRIVATE)
+        documentID =sharedPref.getString(getString(R.string.DocID),"")
 
         val db= FirebaseFirestore.getInstance()
 
 
-        db.collection("Booking").document(documentID!!)
+        db.collection(getString(R.string.Booking)).document(documentID!!)
             .get()
             .addOnSuccessListener { document ->
                 if (document != null) {
 
-                   tv_name.text= "1-> Your Name is: "+document.getString("CustomerName")
-                    tv_noOfRooms.text="2-> Number of Rooms booked: "+document.getString("NumberOfRooms")
-                    tv_noOfChildren.text="3-> Number of Children: "+document.getString("NumberOfChildren")
-                    tv_noOfAdults.text= "4-> Number of Adult: "+document.getString("NumberOfAdults")
-                    tv_bedType.text= "5-> Type of Bed: "+document.getString("TypeOfBed")
-                    tv_roomType.text="6-> Type of Room: "+document.getString("TypeOfRoom")
+                   tv_name.text= getString(R.string.yourName)+document.getString(getString(R.string.CustomerName))
+                    tv_noOfRooms.text=getString(R.string.roomBooked)+document.getString(getString(R.string.NumberOfRooms))
+                    tv_noOfChildren.text=getString(R.string.noOfChildren)+document.getString(getString(R.string.NumberOfChildren))
+                    tv_noOfAdults.text= getString(R.string.noOfAdult)+document.getString(getString(R.string.NumberOfAdults))
+                    tv_bedType.text= getString(R.string.BedType)+document.getString(getString(R.string.TypeOfBed))
+                    tv_roomType.text=getString(R.string.roomType)+document.getString(getString(R.string.TypeOfRoom))
                 } else {
-                    Toast.makeText(this, "No Document", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, getString(R.string.ToastNoDoc), Toast.LENGTH_SHORT)
                         .show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Unable to generate Receipt", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.UnabletogenerateReceipt), Toast.LENGTH_SHORT)
                     .show()
             }
 

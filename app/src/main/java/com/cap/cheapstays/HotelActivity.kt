@@ -37,7 +37,7 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_hotel)
 
 
-        Dataref = FirebaseDatabase.getInstance().reference.child("Hotel")
+        Dataref = FirebaseDatabase.getInstance().reference.child(getString(R.string.Hotel_path))
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -58,7 +58,7 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
 
 
-        val query: com.google.firebase.database.Query = Dataref.orderByChild("Hotel")
+        val query: com.google.firebase.database.Query = Dataref.orderByChild(getString(R.string.Hotel_path))
 
         
 
@@ -84,7 +84,7 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
                 holder.button.setOnClickListener {
                     val intent = Intent(this@HotelActivity,HotelInfoActivity::class.java)
-                    intent.putExtra("HotelKey", getRef(position).key)
+                    intent.putExtra(getString(R.string.sp_HotelKey), getRef(position).key)
                     startActivity(intent)
                 }
             }
@@ -130,7 +130,7 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
                 startActivity(Intent(this@HotelActivity, LoginActivity::class.java))
                 signOut()
-                Toast.makeText(this, "Successfully signed Out!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.ToastSuccessfullysignedOut), Toast.LENGTH_SHORT).show()
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -159,18 +159,18 @@ class HotelActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     private fun dialogBoxAbout() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("About")
-        builder.setMessage("This is Hotel Bookings Management System App designed for the website CheapStays.com")
-        builder.setPositiveButton("OK",null)
+        builder.setTitle(getString(R.string.About))
+        builder.setMessage(getString(R.string.descriptionOfApp))
+        builder.setPositiveButton(getString(R.string.OK),null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
 
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Are you sure want to quit?")
-        builder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> finishAffinity() })
-        builder.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
+        builder.setTitle(getString(R.string.WannaQuit))
+        builder.setPositiveButton(getString(R.string.Yes), { dialogInterface: DialogInterface, i: Int -> finishAffinity() })
+        builder.setNegativeButton(getString(R.string.No),{ dialogInterface: DialogInterface, i: Int -> })
         builder.show()
     }
 

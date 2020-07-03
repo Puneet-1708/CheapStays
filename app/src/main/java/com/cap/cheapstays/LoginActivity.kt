@@ -38,18 +38,18 @@ class LoginActivity : AppCompatActivity() {
             val email = mEmail?.text.toString().trim { it <= ' ' }
             val password = mPassword?.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(email)) {
-                mEmail?.error = "Email is Required."
+                mEmail?.error = getString(R.string.EmailisRequired)
                 return@OnClickListener
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 Toast.makeText(
                     this@LoginActivity,
-                    "Pleas Enter valid Email Address",
+                    getString(R.string.PleasEntervalidEmailAddress),
                     Toast.LENGTH_SHORT
                 ).show()
             }
             else if (TextUtils.isEmpty(password)) {
-                mPassword?.error = "Password is Required."
+                mPassword?.error = getString(R.string.PasswordisRequired)
                 return@OnClickListener
             }
 
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
 
             fAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this@LoginActivity, "Logged in Successfully", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@LoginActivity, getString(R.string.LoggedinSuccessfully), Toast.LENGTH_SHORT)
                         .show()
                     startActivity(Intent(applicationContext,MapsActivity::class.java))
                 } else {
@@ -83,16 +83,17 @@ class LoginActivity : AppCompatActivity() {
         forgotTextLink?.setOnClickListener(View.OnClickListener { v ->
             val resetMail = EditText(v.context)
             val passwordResetDialog = AlertDialog.Builder(v.context)
-            passwordResetDialog.setTitle("Reset Password ?")
-            passwordResetDialog.setMessage("Enter Your Email To Received Reset Link.")
+            passwordResetDialog.setTitle(getString(R.string.ResetPass))
+            passwordResetDialog.setMessage(getString(R.string.ReceivedMailLink))
             passwordResetDialog.setView(resetMail)
-            passwordResetDialog.setPositiveButton("Yes") { dialog, which -> // extract the email and send reset link
+            passwordResetDialog.setPositiveButton(getString(R.string.Yes)) { dialog, which -> // extract the email and send reset link
                 val mail = resetMail.text.toString()
-                fAuth!!.sendPasswordResetEmail(mail).addOnSuccessListener { Toast.makeText(this@LoginActivity, "Reset Link Sent To Your Email.", Toast.LENGTH_SHORT).show() }
+                fAuth!!.sendPasswordResetEmail(mail).addOnSuccessListener { Toast.makeText(this@LoginActivity, getString(
+                                    R.string.ToastResetLink), Toast.LENGTH_SHORT).show() }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this@LoginActivity, "Error ! Reset Link is Not Sent" + e.message, Toast.LENGTH_SHORT).show() }
+                        Toast.makeText(this@LoginActivity, getString(R.string.ToastReset) + e.message, Toast.LENGTH_SHORT).show() }
             }
-            passwordResetDialog.setNegativeButton("No") { dialog, which ->
+            passwordResetDialog.setNegativeButton(getString(R.string.No)) { dialog, which ->
             }
             passwordResetDialog.create().show()
         })
@@ -100,9 +101,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Are you sure want to quit?")
-        builder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> finishAffinity() })
-        builder.setNegativeButton("No",{ dialogInterface: DialogInterface, i: Int -> })
+        builder.setTitle(getString(R.string.Areyousurewanttoquit))
+        builder.setPositiveButton(getString(R.string.Yes), { dialogInterface: DialogInterface, i: Int -> finishAffinity() })
+        builder.setNegativeButton(getString(R.string.No),{ dialogInterface: DialogInterface, i: Int -> })
         builder.show()
     }
 }

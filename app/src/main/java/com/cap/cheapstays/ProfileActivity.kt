@@ -54,34 +54,35 @@ class ProfileActivity : AppCompatActivity() {
         val documentReference = fStore!!.collection("users").document(userId!!)
         documentReference.addSnapshotListener(this) { documentSnapshot, e ->
             if (documentSnapshot!!.exists()) {
-                phone?.text = documentSnapshot.getString("mobile")
-                fullName?.text = documentSnapshot.getString("username")
-                email?.text = documentSnapshot.getString("email")
+                phone?.text = documentSnapshot.getString(getString(R.string.sp_mobile))
+                fullName?.text = documentSnapshot.getString(getString(R.string.sp_username))
+                email?.text = documentSnapshot.getString(getString(R.string.sp_email))
             } else {
-                Log.d("tag", "onEvent: Document do not exists")
+                Toast.makeText(this, getString(R.string.ToastDocNotExist),Toast.LENGTH_SHORT).show()
             }
         }
         resetPassLocal?.setOnClickListener(View.OnClickListener { v ->
             val resetPassword = EditText(v.context)
             val passwordResetDialog = AlertDialog.Builder(v.context)
-            passwordResetDialog.setTitle("Reset Password ?")
-            passwordResetDialog.setMessage("Enter New Password > 6 Characters long.")
+            passwordResetDialog.setTitle(getString(R.string.resetPassword))
+            passwordResetDialog.setMessage(getString(R.string.EnterNewPassword))
             passwordResetDialog.setView(resetPassword)
-            passwordResetDialog.setPositiveButton("Yes") { dialog, which -> // extract the email and send reset link
+            passwordResetDialog.setPositiveButton(getString(R.string.Yes)) { dialog, which -> // extract the email and send reset link
                 val newPassword = resetPassword.text.toString()
-                user!!.updatePassword(newPassword).addOnSuccessListener { Toast.makeText(this@ProfileActivity, "Password Reset Successfully.", Toast.LENGTH_SHORT).show() }.addOnFailureListener { Toast.makeText(this@ProfileActivity, "Password Reset Failed.", Toast.LENGTH_SHORT).show() }
+                user!!.updatePassword(newPassword).addOnSuccessListener { Toast.makeText(this@ProfileActivity, getString(
+                                    R.string.ToastPasswordResetSuccessfully), Toast.LENGTH_SHORT).show() }.addOnFailureListener { Toast.makeText(this@ProfileActivity, getString(
+                                                        R.string.ToastResetFailed), Toast.LENGTH_SHORT).show() }
             }
-            passwordResetDialog.setNegativeButton("No") { dialog, which ->
-                // close
+            passwordResetDialog.setNegativeButton(getString(R.string.No)) { dialog, which ->
             }
             passwordResetDialog.create().show()
         })
         changeProfileImage?.setOnClickListener(View.OnClickListener { v ->
             // open gallery
             val i = Intent(v.context, EditProfile::class.java)
-            i.putExtra("fullName", fullName?.text.toString())
-            i.putExtra("email", email?.text.toString())
-            i.putExtra("phone", phone?.text.toString())
+            i.putExtra(getString(R.string.getfullName), fullName?.text.toString())
+            i.putExtra(getString(R.string.getemail), email?.text.toString())
+            i.putExtra(getString(R.string.getphone), phone?.text.toString())
             startActivity(i)
             //
         })
@@ -93,7 +94,4 @@ class ProfileActivity : AppCompatActivity() {
         finish()
     }
 
-    companion object {
-        private const val GALLERY_INTENT_CODE = 1023
-    }
 }

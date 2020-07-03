@@ -28,16 +28,16 @@ class AdminLoginActivity:AppCompatActivity() {
         val adminPassword: EditText? = findViewById(R.id.admin_login_password)
 
         val db=FirebaseFirestore.getInstance()
-        val docRef = db.collection("admin").document("Puneet")
+        val docRef = db.collection(getString(R.string.admin_path)).document(getString(R.string.admin_doc_path))
 
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                     firebaseEmail= document.getString("adminEmail").toString()
-                     firebasePassword=document.getString("adminPassword").toString()
+                     firebaseEmail= document.getString(getString(R.string.adminEmail)).toString()
+                     firebasePassword=document.getString(getString(R.string.adminPassword)).toString()
                 } else {
 
-                    Toast.makeText(this,"Document does not exist!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.document_not_exist),Toast.LENGTH_SHORT).show()
                 }
             }
         fAuth = FirebaseAuth.getInstance()
@@ -47,18 +47,18 @@ class AdminLoginActivity:AppCompatActivity() {
             val adminPass = adminPassword?.text.toString().trim{ it <= ' ' }
 
             if (TextUtils.isEmpty(adminMail)) {
-           adminEmail?.error="Please Enter Email"
+           adminEmail?.error=getString(R.string.enterEmail)
             } else if (!Patterns.EMAIL_ADDRESS.matcher(adminMail).matches()) {
-            adminEmail?.error="Pleas Enter valid Email Address"
+            adminEmail?.error=getString(R.string.PleaseEntervalidEmailAddress)
             } else if (TextUtils.isEmpty(adminPass)) {
-               adminPassword?.error="Pleas Enter Password"
+               adminPassword?.error=getString(R.string.enterPassword)
             }  else {
                 progressBarAdmin.visibility= View.VISIBLE
 
                 fAuth?.signInWithEmailAndPassword(firebaseEmail!!,firebasePassword!!)
                     ?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Logged in Successfully", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, getString(R.string.toast_loged_in), Toast.LENGTH_SHORT)
                                 .show()
                             startActivity(Intent(this, HotelAdminActivity::class.java))
                         } else {

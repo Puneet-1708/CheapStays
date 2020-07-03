@@ -50,26 +50,26 @@ class RegisterActivity : AppCompatActivity() {
         mRegisterBtn?.setOnClickListener(View.OnClickListener {
 
             if (TextUtils.isEmpty(mFullName?.text.toString())){
-           mFullName?.error="Please Enter Name"
+           mFullName?.error=getString(R.string.PleaseEnterName)
             }
             else if (TextUtils.isEmpty(mPhone?.text.toString())) {
-              mPhone?.error="Please Enter Mobile Number"
+              mPhone?.error=getString(R.string.PleaseEnterMobileNumber)
             }
             else if (mPhone?.text.toString().length!=10){
-           mPhone?.error="Please Enter a 10 Digit Mobile Number"
+           mPhone?.error=getString(R.string.EnterMobileNumber)
             }
             else if (TextUtils.isEmpty(mEmail?.text.toString())) {
-             mEmail?.error="Pleas Enter Email Address"
+             mEmail?.error=getString(R.string.PleaseEnterEmailAddress)
             } else if (!Patterns.EMAIL_ADDRESS.matcher(mEmail?.text.toString()).matches()) {
-           mEmail?.error="Pleas Enter valid Email Address"
+           mEmail?.error=getString(R.string.PleaseEntervalidEmailAddress)
             }else if (TextUtils.isEmpty(mPassword?.text.toString())) {
-           mPassword?.error="Pleas Enter Password"
+           mPassword?.error=getString(R.string.PleaseEnterPassword)
             }
           else if (mPassword?.text.toString().length < 8) {
-         mPassword?.error="Pleas Enter 8 or more numbers password"
+         mPassword?.error=getString(R.string.PleaseEnter8Password)
             }
             else if (mPassword?.text.toString()!=confirmPassword?.text.toString()){
-              confirmPassword?.error="Password must be Same"
+              confirmPassword?.error=getString(R.string.PasswordmustbeSame)
             }
             else {
                 progressBarRegister?.visibility = View.VISIBLE
@@ -88,26 +88,28 @@ class RegisterActivity : AppCompatActivity() {
                     fuser!!.sendEmailVerification().addOnSuccessListener {
                         Toast.makeText(
                             this@RegisterActivity,
-                            "Verification Email Has been Sent.",
+                            getString(R.string.ToastVerificationEmail),
                             Toast.LENGTH_SHORT
                         ).show()
                     }.addOnFailureListener { e ->
-                      Toast.makeText(this,"Email not sent",Toast.LENGTH_SHORT).show()
+                      Toast.makeText(this,getString(R.string.Emailnotsent),Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(this@RegisterActivity, "User Created.", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@RegisterActivity, getString(R.string.UserCreated), Toast.LENGTH_SHORT)
                         .show()
                     userID = fAuth!!.currentUser!!.uid
-                    val documentReference = fStore!!.collection("users").document(userID!!)
+                    val documentReference = fStore!!.collection(getString(R.string.users)).document(userID!!)
                     val user: MutableMap<String, Any> = HashMap()
-                    user["username"] = mFullName!!.text.toString()
-                    user["email"] = mEmail!!.text.toString()
-                    user["mobile"] = mPhone!!.text.toString()
-                    user["password"] = mPassword!!.text.toString()
+                    user[getString(R.string.username)] = mFullName!!.text.toString()
+                    user[getString(R.string.r_email)] = mEmail!!.text.toString()
+                    user[getString(R.string.r_mobile)] = mPhone!!.text.toString()
+                    user[getString(R.string.r_password)] = mPassword!!.text.toString()
                     documentReference.set(user).addOnSuccessListener {
-                        Toast.makeText(this,"User Profile Created",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,getString(R.string.ToastProfileCreated),Toast.LENGTH_SHORT).show()
 
                     }
-                        .addOnFailureListener { e -> Log.d(TAG, "onFailure: $e") }
+                        .addOnFailureListener {
+                            Toast.makeText(this,getString(R.string.ToastProfileNotCreated),Toast.LENGTH_SHORT).show()
+                        }
                     startActivity(Intent(applicationContext, LoginActivity::class.java))
                 } else {
                     Toast.makeText(
@@ -123,8 +125,5 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    companion object {
-        const val TAG = "TAG"
-    }
 }
 
